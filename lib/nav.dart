@@ -1,3 +1,4 @@
+import 'package:asesmen_starbhak_mart/add.dart';
 import 'package:asesmen_starbhak_mart/cart.dart';
 import 'package:asesmen_starbhak_mart/home.dart';
 import 'package:asesmen_starbhak_mart/list.dart';
@@ -13,7 +14,7 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[Home(), Cart(), AddData()];
+  List<Widget> _widgetOptions = <Widget>[Home(), Cart(), AddData(), ListPage()];
 
   void _OnItemTap(int Index) {
     setState(() {

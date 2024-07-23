@@ -1,4 +1,3 @@
-import 'package:asesmen_starbhak_mart/home.dart';
 import 'package:asesmen_starbhak_mart/nav.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +9,8 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+  List<int> quantities = [1, 1, 1];
+
   Widget _buildIconButton(IconData icon, VoidCallback onTap) {
     return Flexible(
       flex: 1,
@@ -42,7 +43,7 @@ class _CartState extends State<Cart> {
   }
 
   Widget _buildDetailData(String image, String text, String text2, String text3,
-      IconData icon, IconData icon2, IconData icon3) {
+      IconData icon, IconData icon2, IconData icon3, int index) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +87,9 @@ class _CartState extends State<Cart> {
               Row(
                 children: <Widget>[
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      _decrementQuantity(index);
+                    },
                     child: Container(
                       width: 20,
                       height: 20,
@@ -105,12 +108,14 @@ class _CartState extends State<Cart> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5),
                     child: Text(
-                      text3,
+                      quantities[index].toString(),
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      _incrementQuantity(index);
+                    },
                     child: Container(
                       width: 20,
                       height: 20,
@@ -137,6 +142,20 @@ class _CartState extends State<Cart> {
         ),
       ],
     );
+  }
+
+  void _incrementQuantity(int index) {
+    setState(() {
+      quantities[index]++;
+    });
+  }
+
+  void _decrementQuantity(int index) {
+    setState(() {
+      if (quantities[index] > 1) {
+        quantities[index]--;
+      }
+    });
   }
 
   @override
@@ -168,32 +187,35 @@ class _CartState extends State<Cart> {
                     children: <Widget>[
                       _buildDetailData(
                         'burger.jpg',
-                        'Ramen Medium',
+                        'burger large',
                         'Rp.50.000,00',
                         '1',
                         Icons.horizontal_rule_outlined,
                         Icons.add_outlined,
                         Icons.delete_outlined,
+                        0,
                       ),
                       SizedBox(height: 30),
                       _buildDetailData(
                         'burger.jpg',
-                        'Green Tea',
-                        'Rp.10.000,00',
+                        'burger medium',
+                        'Rp.20.000,00',
                         '2',
                         Icons.horizontal_rule_outlined,
                         Icons.add_outlined,
                         Icons.delete_outlined,
+                        1,
                       ),
                       SizedBox(height: 30),
                       _buildDetailData(
                         'burger.jpg',
-                        'Ramen Small',
-                        'Rp.30.000,00',
+                        'burger small',
+                        'Rp.25.000,00',
                         '1',
                         Icons.horizontal_rule_outlined,
                         Icons.add_outlined,
                         Icons.delete_outlined,
+                        2,
                       ),
                     ],
                   ),
@@ -252,7 +274,7 @@ class _CartState extends State<Cart> {
                               borderRadius: BorderRadius.circular(20),
                               gradient: LinearGradient(
                                 colors: <Color>[
-                                  Color.fromARGB(255, 5, 62, 148),  
+                                  Color.fromARGB(255, 5, 62, 148),
                                   Colors.blue,
                                 ],
                               ),
@@ -294,4 +316,10 @@ class _CartState extends State<Cart> {
       backgroundColor: Colors.white,
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: Cart(),
+  ));
 }

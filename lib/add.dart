@@ -1,3 +1,4 @@
+import 'package:asesmen_starbhak_mart/list.dart';
 import 'package:asesmen_starbhak_mart/nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var _value = "-1";
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(15),
@@ -20,18 +22,42 @@ class ListPage extends StatelessWidget {
                       return BottomNavBar();
                     }));
                   },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                    size: 35,
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    width: 50,
+                    height: 50,
+                    child: Card(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(
+                          Icons.arrow_back_ios_new,
+                        ),
+                      ),
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
                   onTap: () {},
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.black,
-                    size: 35,
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    width: 50,
+                    height: 50,
+                    child: Card(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(
+                          Icons.person,
+                        ),
+                      ),
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -45,7 +71,25 @@ class ListPage extends StatelessWidget {
             buildTextField("Masukan Harga"),
             SizedBox(height: 20),
             buildText("Kategori produk"),
-            buildTextField("Makanan"),
+            DropdownButtonFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              value: _value,
+              items: [
+                DropdownMenuItem(
+                  child: Text("Makanan"),
+                  value: "-1",
+                ),
+                DropdownMenuItem(
+                  child: Text("Minuman"),
+                  value: "1",
+                ),
+              ],
+              onChanged: ((value) {}),
+            ),
             SizedBox(height: 20),
             buildText("Image"),
             buildTextField("Choose file"),
